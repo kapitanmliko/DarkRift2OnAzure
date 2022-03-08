@@ -29,9 +29,9 @@ We need to modify the Server.config
 **Azure Container Instances do not let you use same port for both TCP and UDP**. 
 For that reason we need to spefify a different UDP port.
 ```xml
-    <listener name="DefaultNetworkListener" type="BichannelListener" address="0.0.0.0" port="4296">
-      <settings noDelay="true" updPort="4297"/>
-    </listener>
+<listener name="DefaultNetworkListener" type="BichannelListener" address="0.0.0.0" port="4296">
+	<settings noDelay="true" updPort="4297"/>
+</listener>
 ```
 
 ## Step 3
@@ -42,24 +42,24 @@ rm ./src/Class1.cs
 ```
 Open the .csproj we just created and add the following.
 ```xml
-	<PropertyGroup>
-		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
-		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-	</PropertyGroup>
+<PropertyGroup>
+	<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+</PropertyGroup>
 
-	<PropertyGroup>
-		<OutputPath>../server/Plugins</OutputPath>
-	</PropertyGroup>
+<PropertyGroup>
+	<OutputPath>../server/Plugins</OutputPath>
+</PropertyGroup>
 
-	<ItemGroup>
-		<Reference Include="DarkRift">
-			<HintPath>../server/Lib/DarkRift.dll</HintPath>
-		</Reference>
-		<Reference Include="DarkRift.Server">
-			<HintPath>../server/Lib/DarkRift.Server.dll</HintPath>
-		</Reference>
-	</ItemGroup>
+<ItemGroup>
+	<Reference Include="DarkRift">
+		<HintPath>../server/Lib/DarkRift.dll</HintPath>
+	</Reference>
+	<Reference Include="DarkRift.Server">
+		<HintPath>../server/Lib/DarkRift.Server.dll</HintPath>
+	</Reference>
+</ItemGroup>
 ```
 
 For the purpose of this guide we can populate the project we just created with some demo plugins.
@@ -101,23 +101,24 @@ It's probably in /Assets/DarkRift/DarkRift/Plugins/Client/
 
 Open it and you will notice this bit
 ```csharp
-	private void Start()
-	{
-		//If connect on start is true then connect to the server
-		if (connectOnStart)
-			Connect(host, port, noDelay);
-	}
+private void Start()
+{
+	//If connect on start is true then connect to the server
+	if (connectOnStart)
+		Connect(host, port, noDelay);
+}
 ```
 
 All you need to do is pass udp port.
 ```csharp
-	Connect(host, port, 4297, noDelay);
+Connect(host, port, 4297, noDelay);
 ```
 
 We should probably put a little more affort into this...
 So you won't use a magic constant and probably modify the Editor script as well.
 
 End result should be something like this:
+
 ![UnityClient](images/unity_client.png)
 
 And that's it! First DarkRift 2 server running on Azure Container Instances.
