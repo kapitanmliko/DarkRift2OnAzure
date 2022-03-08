@@ -18,7 +18,7 @@ mkdir server
 
 ## Step 1
 Unzip "DarkRift Server (.NET 5.0).zip" into server dir we just created. Zip file should be located in DarkRift Networking unity package.
-
+![Content of server dir](images/server_dir.png)
 
 ## Step 2
 
