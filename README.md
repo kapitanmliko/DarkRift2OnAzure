@@ -65,6 +65,8 @@ Open the .csproj we just created and add the following.
 For the purpose of this guide we can populate the project we just created with some demo plugins.
 We can use for example [BlockDemoDarkRiftPlugin](https://github.com/DarkRiftNetworking/BlockDemoDarkRiftPlugin/tree/master/BlockDemoDarkRiftPlugin)
 
+![BlockDemo](images/block_demo.png)
+
 After you add your plugins build the project.
 ```
 cd src
@@ -74,6 +76,7 @@ dotnet build
 ## Step 4
 Build the docker image.
 ```
+cd ..
 docker build -t darkrift-demo-server-image -f Dockerfile .
 ```
 
